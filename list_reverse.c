@@ -2,8 +2,8 @@
  * This is the file in which you'll write a function to reverse a linked list.
  * Make sure to add your name and @oregonstate.edu email address below:
  *
- * Name:
- * Email:
+ * Name: Zeferino Araiza 
+ * Email: araizaz@oregonstate.edu
  */
 
 #include <stdio.h>
@@ -24,5 +24,20 @@
  *   function should return NULL.
  */
 struct node* list_reverse(struct node* first) {
-  return NULL;
+  
+  if (first == NULL) {
+    return NULL;
+  }
+  
+  struct node *curr = first 
+  struct node *prev = NULL;
+  struct node *next;
+  while curr != NULL {
+    next = curr->next;
+    curr->next = prev;
+    prev = curr;
+    curr = next;
+  }
+  
+  return prev;
 }
