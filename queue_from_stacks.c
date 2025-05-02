@@ -3,8 +3,8 @@
  * a queue using two stacks.  Make sure to add your name and @oregonstate.edu
  * email address below:
  *
- * Name:
- * Email:
+ * Name: Zeferino Araiza
+ * Email: araizaz@oregonstate.edu
  */
 
 #include <stdio.h>
@@ -17,7 +17,9 @@
  * your queue and return a pointer to the queue structure.
  */
 struct queue_from_stacks* queue_from_stacks_create() {
-  return NULL;
+  struct queue_from_stacks* queue = malloc(sizeof(struct queue_from_stacks));
+  queue->s1 = stack_create();
+  queue->s2 = stack_create();
 }
 
 /*
@@ -29,7 +31,14 @@ struct queue_from_stacks* queue_from_stacks_create() {
  *     exit the program with an error if queue is NULL.
  */
 void queue_from_stacks_free(struct queue_from_stacks* queue) {
-
+  if (queue == NULL) {
+    fprintf("Queue is NULL.\n");
+    exit(1);
+  }
+  
+  stack_free(queue->s1);
+  stack_free(queue->s2);
+  free(queue);
 }
 
 /*
@@ -44,7 +53,12 @@ void queue_from_stacks_free(struct queue_from_stacks* queue) {
  *   Should return 1 if the queue is empty or 0 otherwise.
  */
 int queue_from_stacks_isempty(struct queue_from_stacks* queue) {
-  return 1;
+  if (queue == NULL) {
+    fprintf("Queue is empty.\n");
+    exit(1);
+  }
+  
+  return stack_isempty(queue->stack_in) && stack_isempty(queue->stack_out);
 }
 
 /*
@@ -56,7 +70,12 @@ int queue_from_stacks_isempty(struct queue_from_stacks* queue) {
  *   value - the new value to be enqueueed onto the queue
  */
 void queue_from_stacks_enqueue(struct queue_from_stacks* queue, int value) {
+  if (queue == NULL) {
+    fprintf("Queue is NULL.\n");
+    exit(1);
+  }
 
+  stack_push(queue->s1, value);
 }
 
 /*
@@ -72,7 +91,24 @@ void queue_from_stacks_enqueue(struct queue_from_stacks* queue, int value) {
  *   Should return the value stored at the front of the queue.
  */
 int queue_from_stacks_front(struct queue_from_stacks* queue) {
-  return 0;
+  if (queue == NULL) {
+    fprintf("Queue is NULL.\n");
+    exit(1);
+  }
+  
+  if (queue_from_stacks_isempty(queue)) {
+    fprintf("Cannot read front from empty queue.\n");
+    exit(1);
+  }
+
+  if (stack_isempty(queue->s2)) {
+    while (!stack_isempty(queue->s1)) {
+      int val = stack_pop(queue->s1);
+      stack_push(queue->s2, val);
+    }
+  }
+
+  return stack_top(queue->s2);
 }
 
 /*
@@ -88,5 +124,22 @@ int queue_from_stacks_front(struct queue_from_stacks* queue) {
  *   is dequeued.
  */
 int queue_from_stacks_dequeue(struct queue_from_stacks* queue) {
-  return 0;
+  if (queue == NULL) {
+    fprintf("Queue is NULL.\n");
+    exit(1);
+  }
+  
+  if (queue_from_stacks_isempty(queue)) {
+    fprintf("Cannot dequeue from empty queue.\n");
+    exit(1);
+  }
+
+  if (stack_isempty(queue->s2)) {
+    while (!stack_isempty(queue->s1)) {
+      int val = stack_pop(queue->s1);
+      stack_push(queue->s2, val);
+    }
+  }
+
+  return stack_pop(queue->s2);
 }
