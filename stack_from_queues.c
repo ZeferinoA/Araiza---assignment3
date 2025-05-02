@@ -8,7 +8,7 @@
  */
 
 #include <stdio.h>
-
+#include <stdlib.h>
 #include "queue.h"
 #include "stack_from_queues.h"
 
@@ -33,7 +33,7 @@ struct stack_from_queues* stack_from_queues_create() {
  */
 void stack_from_queues_free(struct stack_from_queues* stack) {
   if (!stack) {
-    fprintf("Cannot free NULL stack.\n");
+    printf("Cannot free NULL stack.\n");
     exit(1);
   }
 
@@ -55,7 +55,7 @@ void stack_from_queues_free(struct stack_from_queues* stack) {
  */
 int stack_from_queues_isempty(struct stack_from_queues* stack) {
   if (!stack) {
-    fprintf("Cannot check NULL stack.\n");
+    printf("Cannot check NULL stack.\n");
     exit(1);
   }
 
@@ -72,7 +72,7 @@ int stack_from_queues_isempty(struct stack_from_queues* stack) {
  */
 void stack_from_queues_push(struct stack_from_queues* stack, int value) {
   if (!stack) {
-    fprintf("Cannot push to NULL stack.\n");
+    printf("Cannot push to NULL stack.\n");
     exit(1);
   }
 
@@ -102,7 +102,7 @@ void stack_from_queues_push(struct stack_from_queues* stack, int value) {
  */
 int stack_from_queues_top(struct stack_from_queues* stack) {
   if (!stack || queue_isempty(stack->q1)) {
-    fprintf("Cannot access top of empty stack.\n");
+    printf("Cannot access top of empty stack.\n");
     exit(1);
   }
 
@@ -123,7 +123,7 @@ int stack_from_queues_top(struct stack_from_queues* stack) {
  */
 int stack_from_queues_pop(struct stack_from_queues* stack) {
   if (!stack || queue_isempty(stack->q1)) {
-    fprintf("Cannot pop from empty stack.\n");
+    printf("Cannot pop from empty stack.\n");
     exit(1);
   }
 

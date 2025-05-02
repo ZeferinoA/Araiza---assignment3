@@ -8,7 +8,7 @@
  */
 
 #include <stdio.h>
-
+#include <stdlib.h>
 #include "stack.h"
 #include "queue_from_stacks.h"
 
@@ -32,7 +32,7 @@ struct queue_from_stacks* queue_from_stacks_create() {
  */
 void queue_from_stacks_free(struct queue_from_stacks* queue) {
   if (queue == NULL) {
-    fprintf("Queue is NULL.\n");
+    printf("Queue is NULL.\n");
     exit(1);
   }
   
@@ -54,11 +54,11 @@ void queue_from_stacks_free(struct queue_from_stacks* queue) {
  */
 int queue_from_stacks_isempty(struct queue_from_stacks* queue) {
   if (queue == NULL) {
-    fprintf("Queue is empty.\n");
+    printf("Queue is empty.\n");
     exit(1);
   }
   
-  return stack_isempty(queue->stack_in) && stack_isempty(queue->stack_out);
+  return stack_isempty(queue->s1) && stack_isempty(queue->s2);
 }
 
 /*
@@ -71,7 +71,7 @@ int queue_from_stacks_isempty(struct queue_from_stacks* queue) {
  */
 void queue_from_stacks_enqueue(struct queue_from_stacks* queue, int value) {
   if (queue == NULL) {
-    fprintf("Queue is NULL.\n");
+    printf("Queue is NULL.\n");
     exit(1);
   }
 
@@ -92,12 +92,12 @@ void queue_from_stacks_enqueue(struct queue_from_stacks* queue, int value) {
  */
 int queue_from_stacks_front(struct queue_from_stacks* queue) {
   if (queue == NULL) {
-    fprintf("Queue is NULL.\n");
+    printf("Queue is NULL.\n");
     exit(1);
   }
   
   if (queue_from_stacks_isempty(queue)) {
-    fprintf("Cannot read front from empty queue.\n");
+    printf("Cannot read front from empty queue.\n");
     exit(1);
   }
 
@@ -125,12 +125,12 @@ int queue_from_stacks_front(struct queue_from_stacks* queue) {
  */
 int queue_from_stacks_dequeue(struct queue_from_stacks* queue) {
   if (queue == NULL) {
-    fprintf("Queue is NULL.\n");
+    printf("Queue is NULL.\n");
     exit(1);
   }
   
   if (queue_from_stacks_isempty(queue)) {
-    fprintf("Cannot dequeue from empty queue.\n");
+    printf("Cannot dequeue from empty queue.\n");
     exit(1);
   }
 

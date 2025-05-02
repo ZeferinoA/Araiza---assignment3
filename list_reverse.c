@@ -29,10 +29,10 @@ struct node* list_reverse(struct node* first) {
     return NULL;
   }
   
-  struct node *curr = first 
+  struct node *curr = first; 
   struct node *prev = NULL;
   struct node *next;
-  while curr != NULL {
+  while (curr != NULL) {
     next = curr->next;
     curr->next = prev;
     prev = curr;
